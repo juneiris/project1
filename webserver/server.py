@@ -16,10 +16,7 @@ Read about it online.
 """
 
 import os
-<<<<<<< HEAD
 from datetime import datetime
-=======
->>>>>>> 3832bda13f1fe0eb7faf9a620fc32da3f89a306a
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
@@ -42,10 +39,9 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #     DATABASEURI = "postgresql://ewu2493:foobar@w4111db.eastus.cloudapp.azure.com/ewu2493"
 #
 DATABASEURI = "sqlite:///test.db"
-<<<<<<< HEAD
+
 #DATABASEURI = "postgresql://cx2178:RDATHT@w4111db.eastus.cloudapp.azure.com/cx2178"
-=======
->>>>>>> 3832bda13f1fe0eb7faf9a620fc32da3f89a306a
+
 
 
 #
@@ -194,7 +190,6 @@ def index():
 def another():
   return render_template("anotherfile.html")
 
-<<<<<<< HEAD
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -203,8 +198,6 @@ def login():
 def create_account():
     return render_template("createaccount.html")
 
-=======
->>>>>>> 3832bda13f1fe0eb7faf9a620fc32da3f89a306a
 
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
@@ -214,14 +207,6 @@ def add():
   return redirect('/')
 
 
-<<<<<<< HEAD
-
-=======
-@app.route('/login')
-def login():
-    abort(401)
-    this_is_never_executed()
->>>>>>> 3832bda13f1fe0eb7faf9a620fc32da3f89a306a
 
 
 if __name__ == "__main__":
