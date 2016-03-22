@@ -43,9 +43,9 @@ PASSWORD = 'default'
 #
 #     DATABASEURI = "postgresql://ewu2493:foobar@w4111db.eastus.cloudapp.azure.com/ewu2493"
 #
-DATABASEURI = "sqlite:///test.db"
+#DATABASEURI = "sqlite:///test.db"
 
-#DATABASEURI = "postgresql://cx2178:RDATHT@w4111db.eastus.cloudapp.azure.com/cx2178"
+DATABASEURI = "postgresql://cx2178:RDATHT@w4111db.eastus.cloudapp.azure.com/cx2178"
 
 
 
@@ -70,12 +70,12 @@ engine = create_engine(DATABASEURI)
 # 
 # The setup code should be deleted once you switch to using the Part 2 postgresql database
 #
-engine.execute("""DROP TABLE IF EXISTS test;""")
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+#engine.execute("""DROP TABLE IF EXISTS test;""")
+#engine.execute("""CREATE TABLE IF NOT EXISTS test (
+#  id serial,
+#  name text
+#);""")
+#engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 #
 # END SQLITE SETUP CODE
 #
@@ -142,11 +142,13 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM test")
-  names = []
-  for result in cursor:
-    names.append(result['name'])  # can also be accessed using result[0]
-  cursor.close()
+
+
+  #cursor = g.conn.execute("SELECT name FROM test")
+  #names = []
+  #for result in cursor:
+    #names.append(result['name'])  # can also be accessed using result[0]
+  #cursor.close()
 
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
@@ -174,14 +176,14 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names)
+  #context = dict(data = names)
 
 
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
-  return render_template("index.html", **context)
+  #return render_template("index.html", **context)
 
 #
 # This is an example of a different path.  You can see it at
@@ -229,6 +231,27 @@ def add():
   name = request.form['name']
   g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return redirect('/')
+
+
+#show restuarants according to filter
+@app.route('/restlist', methods=['POST'])
+def restlist():
+  type = request.form['Type']
+  area = request.form['Area']
+  take_out = request.form['Take_out']
+  delievery = request.form['Delievery']
+  if type=="none" and area=="none" and take_out=="none" and delievery=="none":
+      cur = g.conn.execute('SELECT shopname FROM shops')
+      names = []
+      for result in cur:
+        names.append(result[0])  # can also be accessed using result[0]
+      cur.close()
+
+  context = dict(data = names)
+  #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
+  return render_template("index.html", **context)
+
+
 
 
 

@@ -10,7 +10,7 @@
 <body>
   <h1>Choose your restuarant!</h1>
 
- <form method="POST"> <!-- action="/add"> -->
+ <form method="POST" action="/restlist"> <!-- action="/add"> -->
     <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
 
     <p>Filter: <select name="Type">
@@ -29,12 +29,12 @@
         <option value="10027">Morningside Height</option>
         <option value="10036">Theater District</option>
      </select>
-     <select name="Take out">
+     <select name="Take_out">
         <option value="none">Take out?</option>
         <option value="t">yes</option>
         <option value="f">no</option>
      </select>
-     <select name="Delievery?">
+     <select name="Delievery">
         <option value="none">Delievery?</option>
         <option value="True">yes</option>
         <option value="False">no</option>
@@ -56,9 +56,9 @@
 <p><a href="/createaccount">Create an account</a></p>
 
 
-<form method="POST" action="/add">
+<!-- <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-</form>
+</form> -->
 
 </body>
 
