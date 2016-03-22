@@ -242,10 +242,12 @@ def restlist():
   delievery = request.form['Delievery']
   if type=="none" and area=="none" and take_out=="none" and delievery=="none":
       cur = g.conn.execute('SELECT shopname FROM shops')
-      names = []
-      for result in cur:
-        names.append(result[0])  # can also be accessed using result[0]
-      cur.close()
+  else:
+      cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
+  names = []
+  for result in cur:
+      names.append(result[0])  # can also be accessed using result[0]
+  cur.close()
 
   context = dict(data = names)
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
