@@ -246,21 +246,21 @@ def restlist():
       if type=="none":
           stp=""
       else:
-          stp="s.shoptype=%s"%type
+          stp=" WHERE s.shoptype=%s"%type
       if area=="none":
           sa=""
           l=""
       else:
-          sa="AND l.shopid=s.shopid AND l.postcode=%s"%area
+          sa=" AND l.shopid=s.shopid AND l.postcode=%s"%area
           l=",locate_in l"
       if take_out=="none":
           stake=""
       else:
-          stake="AND s.s_takeout=%s"%take_out
+          stake=" AND s.s_takeout=%s"%take_out
       if delivery=="none":
           sd=""
       else:
-          sd="AND s.s_delivery=%s"%delivery
+          sd=" AND s.s_delivery=%s"%delivery
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
