@@ -243,8 +243,11 @@ def restlist():
   if type=="none" and area=="none" and take_out=="none" and delievery=="none":
       cur = g.conn.execute('SELECT shopname FROM shops')
   else:
-      cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
+      #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
+      cur = g.conn.execute('SELECT s.shopname FROM shops s WHERE s.shoptype=type')
+
   names = []
+  print cur
   for result in cur:
       names.append(result[0])  # can also be accessed using result[0]
   cur.close()
