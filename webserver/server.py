@@ -25,6 +25,11 @@ tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
 
 
+# configuration
+SECRET_KEY = 'development key'
+USERNAME = 'admin'
+PASSWORD = 'default'
+
 #
 # The following uses the sqlite3 database test.db -- you can use this for debugging purposes
 # However for the project you will need to connect to your Part 2 database in order to use the
@@ -190,9 +195,28 @@ def index():
 def another():
   return render_template("anotherfile.html")
 
-@app.route('/login')
+# @app.route('/login')
+# def login():
+#     return render_template("login.html")
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect('index.html')
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return redirect('index.html')
 
 @app.route('/createaccount')
 def create_account():

@@ -1,4 +1,5 @@
-<html>
+{% extends "layout.html" %}
+
   <style>
     body{ 
       font-size: 15pt;
@@ -8,7 +9,6 @@
 
 
 <body>
-
   <h2>Login</h2>
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
   <form action="{{ url_for('login') }}" method=post>
@@ -24,5 +24,3 @@
 
 </body>
 
-
-</html>
