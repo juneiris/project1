@@ -291,7 +291,7 @@ def restlist():
   names = []
   print cur
   for result in cur:
-      names.append(result[1])  # can also be accessed using result[0]
+      names.append(result)  # can also be accessed using result[0]
   cur.close()
 
   context = dict(data = names)
