@@ -252,6 +252,7 @@ def restlist():
       if area=="none":
           sa=""
           l=""
+          alian=""
       else:
           alian=""
           sa=" l.shopid=s.shopid AND l.postcode='%s'"%area
@@ -261,6 +262,7 @@ def restlist():
 
       if take_out=="none":
           stake=""
+          tlian=""
       else:
           tlian=""
           stake=" s.s_takeout='%s'"%take_out
@@ -269,6 +271,7 @@ def restlist():
 
       if delivery=="none":
           sd=""
+          slian=""
       else:
           slian=""
           sd=" s.s_delivery='%s'"%delivery
