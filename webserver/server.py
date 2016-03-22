@@ -248,6 +248,7 @@ def restlist():
           stp=""
       else:
           stp=" s.shoptype='%s'"%type
+
       if area=="none":
           sa=""
           l=""
@@ -256,26 +257,26 @@ def restlist():
           sa=" l.shopid=s.shopid AND l.postcode='%s'"%area
           l=",locate_in l"
           if type!="none":
-              alian="AND"
+              alian=" AND"
       if take_out=="none":
           stake=""
       else:
           tlian=""
           stake=" s.s_takeout='%s'"%take_out
           if type!="none" or area!="none":
-              tlian="AND"
+              tlian=" AND"
       if delivery=="none":
           sd=""
       else:
           slian=""
           sd=" s.s_delivery='%s'"%delivery
           if type!="none" or area!="none" or take_out!="none":
-              slian="AND"
+              slian=" AND"
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
       #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd
-      q="SELECT s.shopname FROM shops s"+l+w+stp
+      q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
       print q
       cur = g.conn.execute(q)
       #cur = g.conn.execute(q,type,take_out)
