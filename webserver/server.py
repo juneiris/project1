@@ -241,30 +241,41 @@ def restlist():
   take_out = request.form['Take_out']
   delivery = request.form['Delivery']
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      cur = g.conn.execute('SELECT shopname FROM shops')
+      #cur = g.conn.execute('SELECT shopname FROM shops')
+      w=""
   else:
+      w=" WHERE"
       if type=="none":
           stp=""
       else:
-          stp=" WHERE s.shoptype=%s"%type
+          stp=" s.shoptype='%s'"%type
       if area=="none":
           sa=""
           l=""
       else:
-          sa=" AND l.shopid=s.shopid AND l.postcode=%s"%area
+          alian=""
+          sa=" l.shopid=s.shopid AND l.postcode='%s'"%area
           l=",locate_in l"
+          if type!="none":
+              alian="AND"
       if take_out=="none":
           stake=""
       else:
-          stake=" AND s.s_takeout=%s"%take_out
+          tlian=""
+          stake=" s.s_takeout='%s'"%take_out
+          if type!="none" or area!="none":
+              tlian="AND"
       if delivery=="none":
           sd=""
       else:
-          sd=" AND s.s_delivery=%s"%delivery
+          slian=""
+          sd=" s.s_delivery='%s'"%delivery
+          if type!="none" or area!="none" or take_out!="none":
+              slian="AND"
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
-      q="SELECT s.shopname FROM shops s"+l+stp+sa+stake+sd
+      q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa+tlian+stake++slian+sd
       cur = g.conn.execute(q)
       #cur = g.conn.execute(q,type,take_out)
 
