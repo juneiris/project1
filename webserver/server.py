@@ -241,8 +241,7 @@ def restlist():
   take_out = request.form['Take_out']
   delivery = request.form['Delivery']
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      #cur = g.conn.execute('SELECT shopname FROM shops')
-      w=""
+      cur = g.conn.execute('SELECT shopname FROM shops')
   else:
       w=" WHERE"
       if type=="none":
@@ -275,7 +274,7 @@ def restlist():
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
-      q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa+tlian+stake++slian+sd
+      q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd
       print q
       cur = g.conn.execute(q)
       #cur = g.conn.execute(q,type,take_out)
