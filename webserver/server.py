@@ -195,6 +195,8 @@ def index():
 #
 @app.route('/another')
 def another():
+  shopid=request.args.get['shopid']
+  print shopid
     #rpage=request.args.get('')
   return render_template("anotherfile.html")
 
