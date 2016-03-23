@@ -193,9 +193,9 @@ def index():
 # notice that the functio name is another() rather than index()
 # the functions for each app.route needs to have different names
 #
-#@app.route('/another')
-#def another():
-#  return render_template("anotherfile.html")
+@app.route('/another')
+def another():
+  return render_template("anotherfile.html")
 
 # @app.route('/login')
 # def login():
@@ -319,9 +319,9 @@ def restlist():
 
 
 #for n in reslist:
-@app.route('/<data.index(n)>', methods=['GET'])
-def detail(n):
-    return render_template('<data.index(n)>.html')
+#@app.route('/<data.index(n)>', methods=['GET'])
+#def detail(n):
+#    return render_template('<data.index(n)>.html')
 
 
 
