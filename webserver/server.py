@@ -245,8 +245,11 @@ def restlist():
       ratingsort=""
   if sort=="DESC":
       ratingsort=" DESC"
+
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      cur = g.conn.execute('SELECT shopname,rating_score FROM shops ORDER BY s.rating_score'+ratingsort)
+      q="SELECT shopname,rating_score FROM shops ORDER BY s.rating_score"+ratingsort
+      print q
+      cur = g.conn.execute(q)
   else:
       w=" WHERE"
       if type=="none":
