@@ -39,6 +39,10 @@
         <option value="True">yes</option>
         <option value="False">no</option>
      </select>
+     <select name="Sort">
+        <option value="DESC">Sort rating from high to low</option>
+        <option value="none">Sort rating from low to high</option>
+     </select>
      <input type="submit" value="Apply!">
     </p>
  </form>
@@ -50,6 +54,16 @@
     <div>{{n}}</div>
     {% endfor %}
   </div>
+
+
+  <!--
+  <div>
+    {% for n in data %}
+    <div>{{<a href="/detail">n</a>}}</div>
+    {% endfor %}
+  </div>
+    -->
+
 
 <p><a href="/another">Go to the other page</a></p>
 <p><a href="/login">Login</a></p>

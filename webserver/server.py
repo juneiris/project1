@@ -246,8 +246,16 @@ def restlist():
   area = request.form['Area']
   take_out = request.form['Take_out']
   delivery = request.form['Delivery']
+  sort=request.form['Sort']
+  if sort=="none":
+      ratingsort=""
+  if sort=="DESC":
+      ratingsort=" DESC"
+
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      cur = g.conn.execute('SELECT shopname,rating_score FROM shops')
+      q="SELECT shopname,rating_score FROM shops ORDER BY rating_score"+ratingsort
+      print q
+      cur = g.conn.execute(q)
   else:
       w=" WHERE"
       if type=="none":
@@ -286,7 +294,7 @@ def restlist():
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
-      q="SELECT s.shopname,s.rating_score FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"
+      q="SELECT s.shopname,s.rating_score FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"+ratingsort
       #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
       #q="SELECT s.shopname FROM shops s"+l+w+stp+tlian+stake
 
@@ -298,7 +306,7 @@ def restlist():
   #rating=[]
   print cur
   for result in cur:
-      names.append(result[0]+"         "+str(result[1]))  # can also be accessed using result[0]
+      names.append(result[0]+"     "+str(result[1]))  # can also be accessed using result[0]
       #rating.append(result[1])
   cur.close()
 
@@ -306,7 +314,9 @@ def restlist():
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return render_template("index.html", **context)
 
-
+#@app.route('/detail', methods=['GET'])
+#def detail():
+#  return render_template("detail.html")
 
 
 
