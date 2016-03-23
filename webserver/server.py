@@ -207,18 +207,22 @@ def login():
     if request.method == 'POST':
        username = request.form['username']
        passwords = g.conn.execute("SELECT password FROM users WHERE username='%s'"%username)
+       error = 'No Such User'
        uids = g.conn.execute("SELECT userid FROM users WHERE username='%s'"%username)
        for id in uids:
+           global uid
            uid = id[0]
-	   print uid
+#	   print uid
        for password in passwords:
-	   print password[0]
-           if request.form['password'] != password[0]:
+	   getpassword = password[0]
+           if request.form['password'] != getpassword:
                 error = 'Login Error, Try Again'
            else:
 #               session['logged_in'] = True
-               print 'You were logged in'
-               return redirect('/')
+             	print 'You were logged in'
+               	return redirect('/')
+       passwords.close();
+       uids.close();
     return render_template('login.html', error=error)
 
 @app.route('/logout')
@@ -245,76 +249,87 @@ def add():
 reslist=[]
 @app.route('/restlist', methods=['POST'])
 def restlist():
-  type = request.form['Type']
-  area = request.form['Area']
-  take_out = request.form['Take_out']
-  delivery = request.form['Delivery']
-  sort=request.form['Sort']
-  if sort=="none":
-      ratingsort=""
-  if sort=="DESC":
-      ratingsort=" DESC"
+  if request.form["submit"] == "Apply!" :
+      type = request.form['Type']
+      area = request.form['Area']
+      take_out = request.form['Take_out']
+      delivery = request.form['Delivery']
+      sort=request.form['Sort']
+      if sort=="none":
+          ratingsort=""
+      if sort=="DESC":
+          ratingsort=" DESC"
 
-  if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      q="SELECT shopname,rating_score,shopid FROM shops ORDER BY rating_score"+ratingsort
-      #print q
-      cur = g.conn.execute(q)
-  else:
-      w=" WHERE"
-      if type=="none":
-          stp=""
+      if type=="none" and area=="none" and take_out=="none" and delivery=="none":
+          q="SELECT shopname,rating_score,shopid FROM shops ORDER BY rating_score"+ratingsort
+          print q
+          cur = g.conn.execute(q)
       else:
-          stp=" s.shoptype='%s'"%type
+          w=" WHERE"
+          if type=="none":
+              stp=""
+          else:
+              stp=" s.shoptype='%s'"%type
 
-      if area=="none":
-          sa=""
-          l=""
-          alian=""
-      else:
-          alian=""
-          sa=" l.shopid=s.shopid AND l.postcode='%s'"%area
-          l=",locate_in l"
-          if type!="none":
-              alian=" AND"
+          if area=="none":
+              sa=""
+              l=""
+              alian=""
+          else:
+              alian=""
+              sa=" l.shopid=s.shopid AND l.postcode='%s'"%area
+              l=",locate_in l"
+              if type!="none":
+                  alian=" AND"
 
-      if take_out=="none":
-          stake=""
-          tlian=""
-      else:
-          tlian=""
-          stake=" s.s_takeout='%s'"%take_out
-          if type!="none" or area!="none":
-              tlian=" AND"
+          if take_out=="none":
+              stake=""
+              tlian=""
+          else:
+              tlian=""
+              stake=" s.s_takeout='%s'"%take_out
+              if type!="none" or area!="none":
+                  tlian=" AND"
 
-      if delivery=="none":
-          sd=""
-          slian=""
-      else:
-          slian=""
-          sd=" s.s_delivery='%s'"%delivery
-          if type!="none" or area!="none" or take_out!="none":
-              slian=" AND"
+          if delivery=="none":
+              sd=""
+              slian=""
+          else:
+              slian=""
+              sd=" s.s_delivery='%s'"%delivery
+              if type!="none" or area!="none" or take_out!="none":
+                  slian=" AND"
 
-      #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
-      #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
-      q="SELECT s.shopname,s.rating_score,shopid FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"+ratingsort
-      #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
-      #q="SELECT s.shopname FROM shops s"+l+w+stp+tlian+stake
+          #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
+          #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
+          q="SELECT s.shopname,s.rating_score,s.shopid FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"+ratingsort
+          #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
+          #q="SELECT s.shopname FROM shops s"+l+w+stp+tlian+stake
 
-      #print q
-      cur = g.conn.execute(q)
-      #cur = g.conn.execute(q,type,take_out)
+          print q
+          cur = g.conn.execute(q)
+          #cur = g.conn.execute(q,type,take_out)
 
-  names = []
-  #rating=[]
-  #print cur
-  for result in cur:
-      names.append(result[0]+"   "+str(result[1])+"   "+result[2])  # can also be accessed using result[0]
-      #rating.append(result[1])
-  cur.close()
-  global reslist
-  reslist=names
-  context = dict(data = names)
+      names = []
+      #rating=[]
+      print cur
+      for result in cur:
+          names.append(result[0]+"   "+str(result[1])+"   "+result[2])   # can also be accessed using result[0]
+          #rating.append(result[1])
+      cur.close()
+      global reslist
+      reslist=names
+      context = dict(data = names)
+
+  if request.form["submit"] == "Order History" :
+      print uid
+      shopnames = g.conn.execute("SELECT s.shopname FROM shops s, orders o WHERE s.shopid = o.shopid AND o.userid='%s'"%uid)
+      shops = []
+      for shopname in shopnames:
+	  shops.append(shopname[0])
+      shopnames.close()
+      context = dict(data = shops)
+#  elif  ( $_REQUEST['orderhistory'] )
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return render_template("index.html", **context)
 

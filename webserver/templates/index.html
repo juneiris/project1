@@ -11,8 +11,6 @@
   <h1>Choose your restuarant!</h1>
 
  <form method="POST" action="/restlist"> <!-- action="/add"> -->
-    <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-
     <p>Filter: <select name="Type">
         <option value="none">Choose Shop Type</option>
         <option value="none">All</option>
@@ -43,7 +41,8 @@
         <option value="DESC">Sort rating from high to low</option>
         <option value="none">Sort rating from low to high</option>
      </select>
-     <input type="submit" value="Apply!">
+	<input type="submit" name="submit" value="Apply!">
+	<input type="submit" name="submit" value="Order History">
     </p>
  </form>
 
