@@ -300,7 +300,7 @@ def restlist():
   #rating=[]
   print cur
   for result in cur:
-      names.append(result[0]+"         "+str(result[1]))  # can also be accessed using result[0]
+      names.append(result[0]+"                            "+str(result[1]))  # can also be accessed using result[0]
       #rating.append(result[1])
   cur.close()
 
