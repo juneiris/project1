@@ -195,6 +195,7 @@ def index():
 #
 @app.route('/another')
 def another():
+    #rpage=request.args.get('')
   return render_template("anotherfile.html")
 
 # @app.route('/login')
