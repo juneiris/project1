@@ -319,9 +319,10 @@ def restlist():
 
 
 for n in reslist:
-    @app.route('/another')
+    @app.route('<n>')
     def detail(n):
-        return render_template("anotherfile.html",n)
+        pass
+        #return render_template("anotherfile.html",n)
 
 
 
