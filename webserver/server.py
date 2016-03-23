@@ -320,9 +320,9 @@ def restlist():
 
 
 #for n in reslist:
-@app.route('/The%20Hamilton%20%20%20%20%205.0', methods=['GET'])
+@app.route('/The%20Hamilton', methods=['GET'])
 def detail(n):
-    return render_template('The%20Hamilton%20%20%20%20%205.0.html')
+    return render_template('The%20Hamilton.html')
 
 
 
