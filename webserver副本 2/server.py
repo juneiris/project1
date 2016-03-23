@@ -317,12 +317,7 @@ def restlist():
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return render_template("index.html", **context)
 
-
-for n in reslist:
-    @app.route('<n>')
-    def detail(n):
-        pass
-        #return render_template("anotherfile.html")
+  for n in reslist:
 
 
 
