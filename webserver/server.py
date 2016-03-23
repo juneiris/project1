@@ -339,9 +339,7 @@ def restlist():
 def detail():
     return render_template('mVHrayj.html')
 
-localhost/m?name=
-@app.route('/m', methods=['GET'])
-def mm():
+
 
 
 
