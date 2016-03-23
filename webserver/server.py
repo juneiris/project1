@@ -314,9 +314,7 @@ def restlist():
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return render_template("index.html", **context)
 
-#@app.route('/detail', methods=['GET'])
-#def detail():
-#  return render_template("detail.html")
+
 
 
 
