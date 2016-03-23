@@ -318,10 +318,10 @@ def restlist():
   return render_template("index.html", **context)
 
 
-for n in reslist:
-    @app.route('<n>')
-    def detail(n):
-        return render_template('login.html')
+#for n in reslist:
+@app.route('/The%20Hamilton%20%20%20%20%205.0', methods=['GET'])
+def detail(n):
+        return render_template('/The%20Hamilton%20%20%20%20%205.0.html')
 
 
 
