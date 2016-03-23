@@ -256,7 +256,7 @@ def restlist():
 
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
       q="SELECT shopname,rating_score FROM shops ORDER BY rating_score"+ratingsort
-      print q
+      #print q
       cur = g.conn.execute(q)
   else:
       w=" WHERE"
@@ -300,13 +300,13 @@ def restlist():
       #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
       #q="SELECT s.shopname FROM shops s"+l+w+stp+tlian+stake
 
-      print q
+      #print q
       cur = g.conn.execute(q)
       #cur = g.conn.execute(q,type,take_out)
 
   names = []
   #rating=[]
-  print cur
+  #print cur
   for result in cur:
       names.append(result[0]+"     "+str(result[1]))  # can also be accessed using result[0]
       #rating.append(result[1])
@@ -318,10 +318,10 @@ def restlist():
   return render_template("index.html", **context)
 
 
-for n in reslist:
-    @app.route('/<data.index(n)>', methods=['GET'])
-    def detail(n):
-        return render_template('<data.index(n)>.html')
+#for n in reslist:
+@app.route('/<data.index(n)>', methods=['GET'])
+def detail(n):
+    return render_template('<data.index(n)>.html')
 
 
 
@@ -351,7 +351,7 @@ if __name__ == "__main__":
     """
 
     HOST, PORT = host, port
-    print "running on %s:%d" % (HOST, PORT)
+    #print "running on %s:%d" % (HOST, PORT)
     app.run(host=HOST, port=PORT, debug=debug, threaded=threaded)
 
 
