@@ -300,7 +300,7 @@ def restlist():
   #rating=[]
   print cur
   for result in cur:
-      names.append(result[0]+"                            "+str(result[1]))  # can also be accessed using result[0]
+      names.append(result[0]+"     "+str(result[1]))  # can also be accessed using result[0]
       #rating.append(result[1])
   cur.close()
 
@@ -308,7 +308,9 @@ def restlist():
   #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return render_template("index.html", **context)
 
-
+@app.route('/detail', methods=['GET'])
+def another():
+  return render_template("detail.html")
 
 
 
