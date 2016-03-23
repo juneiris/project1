@@ -309,7 +309,7 @@ def restlist():
   return render_template("index.html", **context)
 
 @app.route('/detail', methods=['GET'])
-def another():
+def detail():
   return render_template("detail.html")
 
 
