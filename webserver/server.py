@@ -80,7 +80,7 @@ engine = create_engine(DATABASEURI)
 # END SQLITE SETUP CODE
 #
 
-
+uid = '111111'
 
 @app.before_request
 def before_request():
@@ -204,14 +204,20 @@ def another():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
-            error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
-        else:
-            session['logged_in'] = True
-            flash('You were logged in')
-            return redirect('index.html')
+       username = request.form['username']
+       passwords = g.conn.execute("SELECT password FROM users WHERE username='%s'"%username)
+       uids = g.conn.execute("SELECT userid FROM users WHERE username='%s'"%username)
+       for id in uids:
+           uid = id[0]
+	   print uid
+       for password in passwords:
+	   print password[0]
+           if request.form['password'] != password[0]:
+                error = 'Login Error, Try Again'
+           else:
+#               session['logged_in'] = True
+               print 'You were logged in'
+               return redirect('/')
     return render_template('login.html', error=error)
 
 @app.route('/logout')
