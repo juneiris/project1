@@ -321,7 +321,7 @@ def restlist():
 
 #for n in reslist:
 @app.route('/0', methods=['GET'])
-def detail(n):
+def detail():
     return render_template('0.html')
 
 
