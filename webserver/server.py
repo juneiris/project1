@@ -256,7 +256,7 @@ def restlist():
       ratingsort=" DESC"
 
   if type=="none" and area=="none" and take_out=="none" and delivery=="none":
-      q="SELECT shopname,rating_score FROM shops ORDER BY rating_score"+ratingsort
+      q="SELECT shopname,rating_score,shopid FROM shops ORDER BY rating_score"+ratingsort
       #print q
       cur = g.conn.execute(q)
   else:
@@ -297,7 +297,7 @@ def restlist():
 
       #cur = g.conn.execute('SELECT s.shopname FROM shops s,locate_in l WHERE s.shopid=l.shopid AND s.shoptype=type AND l.postcode=area AND s.s_takeout=take_out AND s.s_delivery=delievery')
       #q = 'SELECT s.shopname FROM shops s WHERE s.shoptype=%s AND s.s_takeout=%s'
-      q="SELECT s.shopname,s.rating_score FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"+ratingsort
+      q="SELECT s.shopname,s.rating_score,shopid FROM shops s"+l+w+stp+alian+sa+tlian+stake+slian+sd+" ORDER BY s.rating_score"+ratingsort
       #q="SELECT s.shopname FROM shops s"+l+w+stp+alian+sa
       #q="SELECT s.shopname FROM shops s"+l+w+stp+tlian+stake
 
@@ -309,7 +309,7 @@ def restlist():
   #rating=[]
   #print cur
   for result in cur:
-      names.append(result[0]+"     "+str(result[1]))  # can also be accessed using result[0]
+      names.append(result[0]+"   "+str(result[1])+"   "+result[2])  # can also be accessed using result[0]
       #rating.append(result[1])
   cur.close()
   global reslist
