@@ -195,10 +195,9 @@ def index():
 #
 @app.route('/another')
 def another():
-  shopid=request.args.get['shopid']
-  print shopid
+    print request.args.get['shopid']
     #rpage=request.args.get('')
-  return render_template("anotherfile.html")
+    return render_template("anotherfile.html")
 
 # @app.route('/login')
 # def login():
