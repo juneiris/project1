@@ -195,9 +195,20 @@ def index():
 #
 @app.route('/another')
 def another():
-    print request.args.get('shopid')
-    #rpage=request.args.get('')
-    return render_template("anotherfile.html")
+    shopid=request.args.get('shopid')
+    print shopid
+    q="SELECT s.shopname,s.rating_score,to_char(s.starthour,'HH24:MI:SS'),to_char(s.closehour,'HH24:MI:SS'),s.contactinfo,s.avg_cost,s.cusine_type,s.shoptype FROM shops s WHERE s.shopid=%s"%shopid
+    print q
+    cur = g.conn.execute(q)
+    shopinfo=[]
+    for result in cur:
+        shopinfo.append(result[0]+"   "+str(result[1])+"   "+result[2]+"   "+result[3]+"   "+result[4]+"   "+str(result[5])+"   "+result[6]+"   "+result[7])   # can also be accessed using result[0]
+
+    cur.close()
+    context = dict(data = shopinfo)
+
+
+    return render_template("anotherfile.html",**context)
 
 # @app.route('/login')
 # def login():
@@ -327,7 +338,7 @@ def restlist():
       shopnames = g.conn.execute("SELECT s.shopname FROM shops s, orders o WHERE s.shopid = o.shopid AND o.userid='%s'"%uid)
       shops = []
       for shopname in shopnames:
-	  shops.append(shopname[0])
+	    shops.append(shopname[0])
       shopnames.close()
       context = dict(data = shops)
 #  elif  ( $_REQUEST['orderhistory'] )

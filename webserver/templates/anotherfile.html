@@ -8,7 +8,19 @@
 
 
 <body>
+<h1>Choose your restuarant!</h1>
 hello
+
+ <div>
+    {% for n in data %}
+      <!--<div><a href="/another">{{n}}</a></div>-->
+      <div>{{n}}</div>
+    {% endfor %}
+  </div>
+
+<p><a href="/login">Login</a></p>
+<p><a href="/createaccount">Create an account</a></p>
+
 
 <!-- <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
