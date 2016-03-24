@@ -209,9 +209,14 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
-                print uid
                 cmttime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 print cmttime
+                v_funnynum=0
+                v_coolnum=0
+                v_useful=0
+                lastlabel=g.conn.execute("SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid)
+                print lastlabel
+
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
             return redirect('/')
