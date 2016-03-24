@@ -197,7 +197,7 @@ def index():
 def another():
     shopid=request.args.get('shopid')
     print shopid
-
+    error=None
 
     #write comments
     if request.method=='POST':
@@ -207,7 +207,7 @@ def another():
             print "ye"
             if uid=='111111':
                 error='Please login first'
-                return render_template('login.html', error=error)
+                return render_template('anotherfile.html', error=error)
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
             return redirect('/')
 
@@ -238,7 +238,7 @@ def another():
 
 
 
-    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds)
+    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds,err=error)
 
 # @app.route('/login')
 # def login():
