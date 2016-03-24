@@ -208,6 +208,11 @@ def another():
                 print "ye"
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
+            else:
+                print uid
+                cmttime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                print cmttime
+
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
             return redirect('/')
 
