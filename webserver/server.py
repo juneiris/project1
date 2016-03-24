@@ -218,7 +218,7 @@ def another():
 
 
 
-    return render_template("anotherfile.html",**context,**context2)
+    return render_template("anotherfile.html",data=shopinfo,cmts=comments)
 
 # @app.route('/login')
 # def login():
