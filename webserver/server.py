@@ -200,7 +200,8 @@ def another():
 
     #write comments
     if request.method=='POST':
-        comtwrt=request.form['comments']
+        cmtwrt=request.form['comments']
+        print cmtwrt
         if request.form['submit']=="Write a comment":
             if uid=='111111':
                 error='Please login first'
