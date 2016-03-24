@@ -193,7 +193,7 @@ def index():
 # notice that the functio name is another() rather than index()
 # the functions for each app.route needs to have different names
 #
-@app.route('/another')
+@app.route('/another',methods=['GET', 'POST'])
 def another():
     shopid=request.args.get('shopid')
     print shopid
@@ -213,9 +213,15 @@ def another():
 
     cur2.close()
 
+    cur3=g.conn.execute("SELECT l.aptnum,l.street,l.city,l.state,l.postcode FROM locate_in l WHERE l.shopid='%s'"%shopid)
+    adds=[]
+    for result in cur3:
+        adds.append(result[0]+"   "+str(result[1])+"   "+result[2]+"   "+result[3]+"   "+result[4])   # can also be accessed using result[0]
+
+    cur3.close()
 
 
-    return render_template("anotherfile.html",data=shopinfo,cmts=comments)
+    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds)
 
 # @app.route('/login')
 # def login():
