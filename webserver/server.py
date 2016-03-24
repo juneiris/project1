@@ -202,7 +202,8 @@ def another():
     if request.method=='POST':
         cmtwrt=request.form['comments']
         print cmtwrt
-        if request.form['submit']=="Write a comment":
+        if request.form["submit"]=="Write a comment":
+            print "ye"
             if uid=='111111':
                 error='Please login first'
                 return render_template('login.html', error=error)
