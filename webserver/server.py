@@ -238,7 +238,7 @@ def another():
 
 
 
-    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds,err=error)
+    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds)
 
 # @app.route('/login')
 # def login():
