@@ -213,9 +213,6 @@ def another():
 
     cur2.close()
 
-    context = dict(data = shopinfo)
-    context2=dict(cmts = comments)
-
 
 
     return render_template("anotherfile.html",data=shopinfo,cmts=comments)
