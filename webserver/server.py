@@ -219,7 +219,7 @@ def another():
         adds.append(result[0]+"   "+str(result[1])+"   "+result[2]+"   "+result[3]+"   "+result[4])   # can also be accessed using result[0]
 
     cur3.close()
-
+    print adds
 
     return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds)
 
