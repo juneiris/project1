@@ -199,17 +199,17 @@ def another():
     print shopid
 
     #write comments
-    # if request.method=='POST':
-    #     if request.form["submit"]=="Write a comment":
-    #         cmtwrt=request.form['comments']
-    #         print cmtwrt
-    #
-    #         if uid=='111111':
-    #             print "ye"
-    #             error='Please login first'
-    #             return render_template('anotherfile.html', error=error)
-    #         #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
-    #         return redirect('/')
+    if request.method=='POST':
+        if request.form["submit"]=="Write a comment":
+            cmtwrt=request.form['comments']
+            print cmtwrt
+
+            if uid=='111111':
+                print "ye"
+                error='Please login first'
+                return render_template('anotherfile.html', error=error)
+            #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
+            return redirect('/')
 
     # query and display
     q="SELECT s.shopname,s.rating_score,to_char(s.starthour,'HH24:MI:SS'),to_char(s.closehour,'HH24:MI:SS'),s.contactinfo,s.avg_cost,s.cusine_type,s.shoptype FROM shops s WHERE s.shopid='%s'"%shopid
