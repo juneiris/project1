@@ -204,8 +204,9 @@ def another():
         if request.form["submit"]=="Write a comment":
             cmtwrt=request.form['comments']
             print cmtwrt
-            print "ye"
+
             if uid=='111111':
+                print "ye"
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
