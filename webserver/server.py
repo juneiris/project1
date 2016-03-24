@@ -197,7 +197,7 @@ def index():
 def another():
     shopid=request.args.get('shopid')
     print shopid
-    q="SELECT s.shopname,s.rating_score,to_char(s.starthour,'HH24:MI:SS'),to_char(s.closehour,'HH24:MI:SS'),s.contactinfo,s.avg_cost,s.cusine_type,s.shoptype FROM shops s WHERE s.shopid=%s"%shopid
+    q="SELECT s.shopname,s.rating_score,to_char(s.starthour,'HH24:MI:SS'),to_char(s.closehour,'HH24:MI:SS'),s.contactinfo,s.avg_cost,s.cusine_type,s.shoptype FROM shops s WHERE s.shopid='%s'"%shopid
     print q
     cur = g.conn.execute(q)
     shopinfo=[]
