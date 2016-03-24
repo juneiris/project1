@@ -215,7 +215,9 @@ def another():
                 v_coolnum=0
                 v_useful=0
                 lastlabel=g.conn.execute("SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid)
-                print lastlabel
+                for result in lastlabel:
+                    label=result[0]
+                print label
 
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
