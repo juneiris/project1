@@ -206,10 +206,10 @@ def another():
 
     cur.close()
 
-    cur2=g.conn.execute("SELECT labelnum,context FROM comments WHERE shopid='%s'"%shopid)
+    cur2=g.conn.execute("SELECT context FROM comments WHERE shopid='%s'"%shopid)
     comments=[]
     for result in cur2:
-        comments.append(result[0]+":"+"   "+result[1]+"/n")   # can also be accessed using result[0]
+        comments.append(result[0]+"/n")   # can also be accessed using result[0]
 
     cur2.close()
 
