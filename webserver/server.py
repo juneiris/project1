@@ -215,8 +215,10 @@ def another():
                 v_coolnum=0
                 v_useful=0
                 lastlabel=g.conn.execute("SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid)
+                label=[]
                 for result in lastlabel:
-                    label=result[0]
+                    label.append(result[0])
+                lastlabel.close()
                 print label
 
 
