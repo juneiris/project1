@@ -197,11 +197,11 @@ def index():
 def another():
     shopid=request.args.get('shopid')
     print shopid
+    cmtwrt=request.form['comments']
+    print cmtwrt
 
     #write comments
     if request.method=='POST':
-        cmtwrt=request.form['comments']
-        print cmtwrt
         if request.form["submit"]=="Write a comment":
             print "ye"
             if uid=='111111':
