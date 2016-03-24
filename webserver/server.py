@@ -197,12 +197,13 @@ def index():
 def another():
     shopid=request.args.get('shopid')
     print shopid
-    cmtwrt=request.form['comments']
-    print cmtwrt
+
 
     #write comments
     if request.method=='POST':
         if request.form["submit"]=="Write a comment":
+            cmtwrt=request.form['comments']
+            print cmtwrt
             print "ye"
             if uid=='111111':
                 error='Please login first'
