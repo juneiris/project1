@@ -18,6 +18,22 @@ hello
     {% endfor %}
   </div>
 
+<form method="POST" action="/another"> <!-- action="/add"> -->
+    <p>
+	<input type="submit" name="submit" value="Like it">
+	<input type="submit" name="submit" value="Reserve it">
+    <input type="submit" name="submit" value="Rate it">
+    <input type="submit" name="submit" value="Write a comment">
+    </p>
+ </form>
+
+<div>
+    {% for c in cmts %}
+      <!--<div><a href="/another">{{n}}</a></div>-->
+      <div>{{c}}</div>
+    {% endfor %}
+</div>
+
 <p><a href="/login">Login</a></p>
 <p><a href="/createaccount">Create an account</a></p>
 
