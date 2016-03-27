@@ -365,11 +365,6 @@ def another():
 
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 rscore=str(request.form["score"])
-                #if rscore=='':
-                #    print "empty"
-                #    error='Your rating score should be smaller than 5'
-                #    return render_template('anotherfile.html',shopid=shopid,error=error)
-                print 'score:',rscore
                 try:
                     rscore=float(rscore)
                     if rscore>5:
@@ -384,9 +379,9 @@ def another():
 
                 #insert new record
                 ratetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                #args=(uid,shopid,ratetime,rscore)
-                #qi="INSERT INTO rate VALUES(%s,%s,%s,%s)"
-                #g.conn.execute(qi, args)
+                args=(uid,shopid,ratetime,rscore)
+                qi="INSERT INTO rate VALUES(%s,%s,%s,%s)"
+                g.conn.execute(qi, args)
 
                 #show relevant info
                 q="SELECT u.username FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
