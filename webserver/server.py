@@ -298,9 +298,9 @@ def another():
                 t=request.form['rtime']
                 if d=='' or t=='':
                     error='Please input your reservation time'
-                    return render_template('anotherfile?shopid=%s.html'%shopid, error=error)
+                    return render_template('anotherfile.html', error=error)
                 dtime=str(d+' '+t)
-                djudge=datetime.strptime(d, "%Y-%m-%d")
+                djudge=date.strptime(d, "%Y-%m-%d")
                 #dtime.strftime('%Y-%m-%d %H:%M:%S')
                 print type(djudge),djudge,type(rtime),rtime
                 #print rtime
