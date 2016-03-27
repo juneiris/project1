@@ -196,6 +196,7 @@ def index():
 @app.route('/another',methods=['GET', 'POST'])
 def another():
     shopid=request.args.get('shopid')
+    shopidcopy=shopid
     print shopid
 
     #write comments
@@ -255,7 +256,7 @@ def another():
 
 
 
-    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds)
+    return render_template("anotherfile.html",data=shopinfo,cmts=comments,address=adds,shopid=shopid)
 
 # @app.route('/login')
 # def login():
