@@ -292,7 +292,7 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
-                # insert new record
+
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 num=str(request.form['pnum'])
                 if num!='':
@@ -307,11 +307,36 @@ def another():
                 dtime=str(d+' '+t)
                 djudge=datetime.strptime(d, "%Y-%m-%d")
 
-                print type(djudge),djudge,type(rtime),rtime,shopid,uid
                 if (djudge-rtime).seconds<1800 or (djudge-rtime).days<0:
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
                     return render_template('anotherfile.html',shopid=shopid,error=error)
                 #print rtime
+
+                cur1=g.conn.execute("SELECT userid from reserve")
+                existuser=[]
+                for result in cur1:
+                    existuser.append(result[0])
+                cur1.close()
+                print existuser
+                if uid in existuser:
+                    cur2=g.conn.execute("SELECT shopid from reserve WHERE userid='%s'"%uid+" AND rdate='%s'"%dtime)
+                    existshop=[]
+                    for result in cur2:
+                        existshop.append(result[0])
+                    cur2.close()
+                    print existshop
+                    if shopid in existshop:
+                        #cur3=g.conn.execute("SELECT rdate from reserve WHERE shopid='%s'"%shopid+" AND userid='%s'"%uid)
+                        #existtime=[]
+                        #for result in cur3:
+                        #    existtime.append(result[0])
+                        #cur3.close()
+                        #print existtime
+                        #if dtime in existtime:
+                            error='You have reserved this shop for that time!'
+                            return render_template('anotherfile.html', shopid=shopid,error=error)
+
+                # insert new record
                 args=(uid,shopid,dtime,num)
                 qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
                 g.conn.execute(qi, args)
