@@ -295,7 +295,8 @@ def another():
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 date=request.form['rdate']
                 time=request.form['rtime']
-                print type(date),date,type(time),time
+                datetime=date+time
+                print type(datetime),datetime
                 #print rtime
                 #args=(uid,shopid,rtime)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s)"
