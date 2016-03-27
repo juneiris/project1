@@ -326,15 +326,8 @@ def another():
                     cur2.close()
                     print existshop
                     if shopid in existshop:
-                        #cur3=g.conn.execute("SELECT rdate from reserve WHERE shopid='%s'"%shopid+" AND userid='%s'"%uid)
-                        #existtime=[]
-                        #for result in cur3:
-                        #    existtime.append(result[0])
-                        #cur3.close()
-                        #print existtime
-                        #if dtime in existtime:
-                            error='You have reserved this shop for that time!'
-                            return render_template('anotherfile.html', shopid=shopid,error=error)
+                        error='You have reserved this shop for that time!'
+                        return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 # insert new record
                 args=(uid,shopid,dtime,num)
