@@ -217,13 +217,14 @@ def another():
                 lastlabel=g.conn.execute("SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid)
                 label=[]
                 for result in lastlabel:
+                    print result
                     label.append(result[0])
                 lastlabel.close()
                 print label
 
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
-            return redirect('/')
+            #return redirect('/')
 
     # query and display
     q="SELECT s.shopname,s.rating_score,to_char(s.starthour,'HH24:MI:SS'),to_char(s.closehour,'HH24:MI:SS'),s.contactinfo,s.avg_cost,s.cusine_type,s.shoptype FROM shops s WHERE s.shopid='%s'"%shopid
