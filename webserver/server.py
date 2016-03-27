@@ -296,7 +296,7 @@ def another():
                 date=request.form['rdate']
                 time=request.form['rtime']
                 dtime=str(date+' '+time)
-                #dtime.strftime('%Y-%m-%d %H:%M:%S')
+                dtime.strftime('%Y-%m-%d %H:%M:%S')
                 print type(dtime),dtime,type(rtime)
                 #print rtime
                 #args=(uid,shopid,rtime)
