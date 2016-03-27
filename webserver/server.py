@@ -195,6 +195,7 @@ def index():
 #
 @app.route('/another',methods=['GET', 'POST'])
 def another():
+    error=None
     shopid=request.args.get('shopid')
     print shopid
 
@@ -293,8 +294,9 @@ def another():
             else:
                 # insert new record
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                num=request.form['pnum']
-                num=int(num)
+                num=str(request.form['pnum'])
+                if num!='':
+                    num=int(num)
                 print num
                 rtime=datetime.now()
                 d=request.form['rdate']
