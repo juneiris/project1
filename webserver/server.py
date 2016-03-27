@@ -302,7 +302,9 @@ def another():
                 dtime=str(d+' '+t)
                 djudge=datetime.strptime(d, "%Y-%m-%d")
                 #dtime.strftime('%Y-%m-%d %H:%M:%S')
-                print type(djudge),djudge,type(rtime),rtime
+                print type(djudge),djudge,type(rtime),rtime,shopid,uid
+                if (djudge-rtime).hour>6:
+                    print "allow"
                 #print rtime
                 #args=(uid,shopid,rtime)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s)"
