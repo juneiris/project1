@@ -384,7 +384,7 @@ def another():
                 g.conn.execute(qi, args)
 
                 #show relevant info
-                q="SELECT u.username r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                q="SELECT u.username,r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
                 rpeople=g.conn.execute(q)
                 people=[]
