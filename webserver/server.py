@@ -16,7 +16,7 @@ Read about it online.
 """
 
 import os
-from datetime import datetime
+from datetime import datetime,date
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
@@ -292,12 +292,13 @@ def another():
                 return render_template('anotherfile.html', error=error)
             else:
                 # insert new record
-                rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                date=request.form['rdate']
-                time=request.form['rtime']
-                dtime=str(date+' '+time)
+                #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                rtime=date.today()
+                d=request.form['rdate']
+                t=request.form['rtime']
+                dtime=str(d+' '+t)
                 #dtime.strftime('%Y-%m-%d %H:%M:%S')
-                print type(dtime),dtime,type(rtime)
+                print type(dtime),dtime,type(rtime),rtime
                 #print rtime
                 #args=(uid,shopid,rtime)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s)"
