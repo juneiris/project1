@@ -227,7 +227,7 @@ def another():
                 qi="INSERT INTO comments VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
                 print qi
                 g.conn.execute(qi, args)
-                return redirect('/')
+                #return redirect('/')
 
 
 
