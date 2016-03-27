@@ -301,14 +301,14 @@ def another():
                 t=request.form['rtime']
                 if d=='' or t=='':
                     error='Please input your reservation time'
-                    return render_template('anotherfile.html', shopid=shopid,error=error)
+                    return render_template('anotherfile.html',shopid=shopid,error=error)
                 dtime=str(d+' '+t)
                 djudge=datetime.strptime(d, "%Y-%m-%d")
 
                 print type(djudge),djudge,type(rtime),rtime,shopid,uid
                 if (djudge-rtime).seconds<1800 or (djudge-rtime).days<0:
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
-                    return render_template('anotherfile.html', shopid=shopid,error=error)
+                    return render_template('anotherfile.html',shopid=shopid,error=error)
                 #print rtime
                 #args=(uid,shopid,dtime,num)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
