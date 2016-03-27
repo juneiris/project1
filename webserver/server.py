@@ -254,8 +254,15 @@ def another():
                         people.append(result[0]+"  ")
                 lpeople.close()
                 #print people
+                q2="SELECT s.shopname FROM likes l, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=l.shopid AND l.userid='%s'"%uid
+                print q2
+                lh=g.conn.execute(q2)
+                hist=[]
+                for result in lh:
+                        hist.append(result[0]+"  ")
+                lh.close()
 
-                return render_template("like.html", data=people)
+                return render_template("like.html", data=people,lhist=hist)
 
 
 
