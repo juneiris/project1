@@ -242,13 +242,14 @@ def another():
                 lpeople=g.conn.execute(q)
                 people=[]
                 for result in lpeople:
+                    print "result0"
                     print result[0]
                     if result[0]== '':
                         people.append("No other people like this restaurant yet...")
                     else:
                         people.append(result[0]+"  ")
                 lpeople.close()
-                print people
+                #print people
 
                 return render_template("like.html", data=people)
 
