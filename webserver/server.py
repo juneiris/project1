@@ -237,6 +237,28 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
+                # check if the record has already existed
+                cur1=g.conn.execute("SELECT userid from likes")
+                existuser=[]
+                for result in cur1:
+                    existuser.append(result[0])
+                cur1.close()
+                print existuser
+
+                if uid in existuser:
+                    cur2=g.conn.execute("SELECT shopid from likes WHERE userid='%s'"%uid)
+                    existshop=[]
+                    for result in cur2:
+                        existshop.append(result[0])
+                    cur2.close()
+                    print existshop
+                    if shopid in existshop:
+                        error='You have liked this shop!'
+                        return render_template('anotherfile.html', error=error)
+
+
+
+
                 ltime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 print ltime
                 args=(uid,shopid,ltime)
