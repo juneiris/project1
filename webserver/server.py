@@ -304,15 +304,15 @@ def another():
                     return render_template('anotherfile.html', shopid=shopid,error=error)
                 dtime=str(d+' '+t)
                 djudge=datetime.strptime(d, "%Y-%m-%d")
-                #dtime.strftime('%Y-%m-%d %H:%M:%S')
+
                 print type(djudge),djudge,type(rtime),rtime,shopid,uid
                 if (djudge-rtime).seconds<1800 or (djudge-rtime).days<0:
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
                     return render_template('anotherfile.html', shopid=shopid,error=error)
                 #print rtime
-                args=(uid,shopid,dtime,num)
-                qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
-                g.conn.execute(qi, args)
+                #args=(uid,shopid,dtime,num)
+                #qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
+                #g.conn.execute(qi, args)
 
                 q="SELECT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
