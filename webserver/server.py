@@ -401,14 +401,14 @@ def another():
                 g.conn.execute(qi, args)
 
                 #show relevant info
-                q="SELECT DISTINCT u.username,r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                q="SELECT u.username,r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
                 rpeople=g.conn.execute(q)
                 people=[]
                 flag=0
                 for result in rpeople:
                     flag=1
-                    people.append(result[0]+"  "+result[1])
+                    people.append(result[0]+"  "+str(result[1]))
                 if flag==0:
                     people.append("No other people rated this shop yet...")
                 rpeople.close()
