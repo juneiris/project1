@@ -215,7 +215,7 @@ def another():
                 v_coolnum=0
                 v_useful=0
                 q="SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid
-                print q
+                #print q
                 lastlabel=g.conn.execute(q)
                 #label=[]
                 for result in lastlabel:
@@ -228,9 +228,25 @@ def another():
 
                 args=(label,shopid,uid,cmttime,cmtwrt,v_funnynum,v_coolnum,v_useful)
                 qi="INSERT INTO comments VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-                print qi
                 g.conn.execute(qi, args)
                 #return redirect('/')
+
+        if request.form["submit"]=="Like it":
+            if uid=='111111':
+                print "ye"
+                error='Please login first'
+                return render_template('anotherfile.html', error=error)
+            else:
+                q="SELECT u.username FROM likes l, users u WHERE u.userid=l.userid AND shopid='%s'"%shopid
+                lpeople=g.conn.execute(q)
+                people=[]
+                for result in lpeople:
+                    people.append(result[0]+"  ")
+                lpeople.close()
+                print people
+
+                return render_template("like.html", data=people)
+
 
 
 

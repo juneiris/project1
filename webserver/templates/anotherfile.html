@@ -38,7 +38,8 @@
       <div>{{a}}</div>
     {% endfor %}
   </div>
-{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+{% if error %}
+<p class=error><strong>Error:</strong> {{ error }}{% endif %}
 <form method="POST" action="/another?shopid={{shopid}}"> <!-- action="/add"> -->
     <p>
 	<input type="submit" name="submit" value="Like it">
