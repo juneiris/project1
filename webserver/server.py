@@ -241,9 +241,9 @@ def another():
                 print q
                 lpeople=g.conn.execute(q)
                 people=[]
+                print "result0"
+                print result
                 for result in lpeople:
-                    print "result0"
-                    print result[0]
                     if result[0]== '':
                         people.append("No other people like this restaurant yet...")
                     else:
