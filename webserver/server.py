@@ -254,7 +254,7 @@ def another():
                     print existshop
                     if shopid in existshop:
                         error='You have liked this shop!'
-                        return render_template('anotherfile.html', error=error)
+                        return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 # insert new record
                 ltime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -293,6 +293,9 @@ def another():
             else:
                 # insert new record
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                num=request.form['pnum']
+                num=int(num)
+                print num
                 rtime=datetime.now()
                 d=request.form['rdate']
                 t=request.form['rtime']
@@ -307,7 +310,7 @@ def another():
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
                     return render_template('anotherfile.html', shopid=shopid,error=error)
                 #print rtime
-                #args=(uid,shopid,rtime)
+                #args=(uid,shopid,dtime,)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s)"
                 #g.conn.execute(qi, args)
 
