@@ -222,8 +222,14 @@ def another():
                 #    print result
                     label=result[0]+1
                 lastlabel.close()
-                print label
-                
+
+                args=(label,shopid,uid,cmttime,cmtwrt,v_funnynum,v_coolnum,v_useful)
+                qi="INSERT INTO comments VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+                print qi
+                g.conn.execute(qi, args)
+                return redirect('/')
+
+
 
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
