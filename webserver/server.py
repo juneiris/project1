@@ -365,16 +365,19 @@ def another():
 
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 rscore=str(request.form["score"])
-                rscorelist=list(rscore)
+                #if rscore=='':
+                #    print "empty"
+                #    error='Your rating score should be smaller than 5'
+                #    return render_template('anotherfile.html',shopid=shopid,error=error)
                 print 'score:',rscore
                 try:
                     rscore=float(rscore)
                     if rscore>5:
                         error='Your rating score should be smaller than 5'
-                        return render_template('rate.html',shopid=shopid,error=error)
+                        return render_template('anotherfile.html',shopid=shopid,error=error)
                 except:
                     error='Please input your rating score as a number smaller than 5'
-                    return render_template('rate.html',shopid=shopid,error=error)
+                    return render_template('anotherfile.html',shopid=shopid,error=error)
 
                 print rscore
 
