@@ -11,7 +11,14 @@
   <h1>Successful!</h1>
 
   <!--<div>{{data}}</div>-->
- <p>See other people who also like this restaurant</p>
+  <p>Other shops that you reserved:</p>
+  {% for r in rhist %}
+      <!--<div><a href="/another">{{n}}</a></div>-->
+      <div>{{r}}</div>
+    {% endfor %}
+  </div>
+
+ <p>See other people who also reserved this restaurant:</p>
   {% for d in data %}
       <!--<div><a href="/another">{{n}}</a></div>-->
       <div>{{d}}</div>

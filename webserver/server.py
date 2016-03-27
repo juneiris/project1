@@ -263,7 +263,7 @@ def another():
                 qi="INSERT INTO likes VALUES(%s,%s,%s)"
                 g.conn.execute(qi, args)
 
-                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND shopid='%s'"%shopid
+                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND l.shopid='%s'"%shopid
                 print q
                 lpeople=g.conn.execute(q)
                 people=[]
@@ -282,8 +282,42 @@ def another():
                 for result in lh:
                         hist.append(result[0]+"  ")
                 lh.close()
-
                 return render_template("like.html", data=people,lhist=hist)
+
+
+        if request.form["submit"]=="Reserve it":
+            if uid=='111111':
+                print "ye"
+                error='Please login first'
+                return render_template('anotherfile.html', error=error)
+            else:
+                # insert new record
+                rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                print rtime
+                args=(uid,shopid,rtime)
+                qi="INSERT INTO reserve VALUES(%s,%s,%s)"
+                g.conn.execute(qi, args)
+
+                q="SELECT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                print q
+                rpeople=g.conn.execute(q)
+                people=[]
+                flag=0
+                for result in rpeople:
+                    flag=1
+                    people.append(result[0]+"  ")
+                if flag==0:
+                    people.append("No other people reserved this shop yet... You are the first!")
+                rpeople.close()
+                #print people
+                q2="SELECT s.shopname FROM reserve r, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=r.shopid AND r.userid='%s'"%uid
+                print q2
+                rh=g.conn.execute(q2)
+                hist=[]
+                for result in rh:
+                        hist.append(result[0]+"  ")
+                rh.close()
+                return render_template("reserve.html", data=people,rhist=hist)
 
 
 
