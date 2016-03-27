@@ -293,7 +293,7 @@ def another():
                 return render_template('anotherfile.html', error=error)
             else:
 
-                #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                #deal with input error
                 num=str(request.form['pnum'])
                 if num!='':
                     num=int(num)
@@ -311,7 +311,7 @@ def another():
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
                     return render_template('anotherfile.html',shopid=shopid,error=error)
                 #print rtime
-
+                #deal with existed record in database
                 cur1=g.conn.execute("SELECT userid from reserve")
                 existuser=[]
                 for result in cur1:
@@ -363,7 +363,7 @@ def another():
                 return render_template('anotherfile.html', error=error)
             else:
 
-                #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                #deal with input error
                 rscore=str(request.form["score"])
                 try:
                     rscore=float(rscore)
@@ -376,6 +376,7 @@ def another():
 
                 print rscore
 
+                # deal with existed record in database
                 cur1=g.conn.execute("SELECT userid from rate")
                 existuser=[]
                 for result in cur1:
@@ -497,6 +498,28 @@ def add():
 reslist=[]
 @app.route('/restlist', methods=['POST'])
 def restlist():
+  if request.form["submit"] == "Search nearby!" :
+      neararea=request.form['Near']
+      if neararea=="none":
+          q="SELECT shopname,rating_score,shopid FROM shops ORDER BY rating_score DESC"
+          print q
+          cur = g.conn.execute(q)
+      else:
+          q="SELECT s.shopname,s.rating_score,s.shopid FROM shops s,locate_in l WHERE l.shopid=s.shopid AND l.postcode='%s' ORDER BY rating_score DESC"%neararea
+          print q
+          cur = g.conn.execute(q)
+
+      names = []
+      #rating=[]
+      print cur
+      for result in cur:
+          names.append(result[0]+"   "+str(result[1])+"   "+result[2])   # can also be accessed using result[0]
+          #rating.append(result[1])
+      cur.close()
+      global reslist
+      reslist=names
+      context = dict(data = names)
+
   if request.form["submit"] == "Apply!" :
       type = request.form['Type']
       area = request.form['Area']
