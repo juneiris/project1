@@ -237,11 +237,13 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
-                q="SELECT u.username FROM likes l, users u WHERE u.userid=l.userid AND shopid='%s'"%shopid
+                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s' AND u.userid=l.userid AND shopid='%s'"%uid%shopid
+                print q
                 lpeople=g.conn.execute(q)
                 people=[]
                 for result in lpeople:
-                    if result[0]== None:
+                    print result[0]
+                    if result[0]== '':
                         people.append("No other people like this restaurant yet...")
                     else:
                         people.append(result[0]+"  ")
