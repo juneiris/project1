@@ -237,9 +237,9 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
-                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s' AND u.userid=l.userid AND shopid='%s'"
+                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND shopid='%s'"%shopid
                 print q
-                lpeople=g.conn.execute(q,(uid,shopid))
+                lpeople=g.conn.execute(q)
                 people=[]
                 for result in lpeople:
                     print result[0]
