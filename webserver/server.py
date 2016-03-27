@@ -256,9 +256,7 @@ def another():
                         error='You have liked this shop!'
                         return render_template('anotherfile.html', error=error)
 
-
-
-
+                # insert new record
                 ltime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 print ltime
                 args=(uid,shopid,ltime)
@@ -269,11 +267,12 @@ def another():
                 print q
                 lpeople=g.conn.execute(q)
                 people=[]
+                flag=0
                 for result in lpeople:
-                    if result[0]== '':
-                        people.append("No other people like this restaurant yet...")
-                    else:
-                        people.append(result[0]+"  ")
+                    flag=1
+                    people.append(result[0]+"  ")
+                if flag==0:
+                    people.append("No other people liked this shop yet... You are the first!")
                 lpeople.close()
                 #print people
                 q2="SELECT s.shopname FROM likes l, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=l.shopid AND l.userid='%s'"%uid
