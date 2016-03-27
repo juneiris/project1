@@ -390,7 +390,7 @@ def another():
                     cur2.close()
                     print existshop
                     if shopid in existshop:
-                        error='You have rated this shop!'
+                        error='You have rated this shop before!'
                         return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 #insert new record
