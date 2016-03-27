@@ -516,8 +516,6 @@ def restlist():
           names.append(result[0]+"   "+str(result[1])+"   "+result[2])   # can also be accessed using result[0]
           #rating.append(result[1])
       cur.close()
-      global reslist
-      reslist=names
       context = dict(data = names)
 
   if request.form["submit"] == "Apply!" :
