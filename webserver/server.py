@@ -220,9 +220,10 @@ def another():
                 #label=[]
                 for result in lastlabel:
                 #    print result
-                    label=result[0]
+                    label=result[0]+1
                 lastlabel.close()
                 print label
+                
 
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
