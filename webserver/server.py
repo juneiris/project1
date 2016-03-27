@@ -264,7 +264,7 @@ def another():
                 qi="INSERT INTO likes VALUES(%s,%s,%s)"
                 g.conn.execute(qi, args)
 
-                q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND l.shopid='%s'"%shopid
+                q="SELECT DISTINCT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND l.shopid='%s'"%shopid
                 print q
                 lpeople=g.conn.execute(q)
                 people=[]
@@ -276,7 +276,7 @@ def another():
                     people.append("No other people liked this shop yet... You are the first!")
                 lpeople.close()
                 #print people
-                q2="SELECT s.shopname FROM likes l, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=l.shopid AND l.userid='%s'"%uid
+                q2="SELECT DISTINCT s.shopname FROM likes l, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=l.shopid AND l.userid='%s'"%uid
                 print q2
                 lh=g.conn.execute(q2)
                 hist=[]
@@ -319,7 +319,7 @@ def another():
                 cur1.close()
                 print existuser
                 if uid in existuser:
-                    cur2=g.conn.execute("SELECT shopid from reserve WHERE userid='%s'"%uid+" AND rdate='%s'"%dtime)
+                    cur2=g.conn.execute("SELECT DISTINCT shopid from reserve WHERE userid='%s'"%uid+" AND rdate='%s'"%dtime)
                     existshop=[]
                     for result in cur2:
                         existshop.append(result[0])
@@ -335,7 +335,7 @@ def another():
                 g.conn.execute(qi, args)
 
                 #show relevant info
-                q="SELECT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                q="SELECT DISTINCT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
                 rpeople=g.conn.execute(q)
                 people=[]
@@ -347,7 +347,7 @@ def another():
                     people.append("No other people reserved this shop yet...")
                 rpeople.close()
                 #print people
-                q2="SELECT s.shopname FROM reserve r, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=r.shopid AND r.userid='%s'"%uid
+                q2="SELECT DISTINCT s.shopname FROM reserve r, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=r.shopid AND r.userid='%s'"%uid
                 print q2
                 rh=g.conn.execute(q2)
                 hist=[]
@@ -401,7 +401,7 @@ def another():
                 g.conn.execute(qi, args)
 
                 #show relevant info
-                q="SELECT u.username,r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                q="SELECT DISTINCT u.username,r.score FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
                 rpeople=g.conn.execute(q)
                 people=[]
