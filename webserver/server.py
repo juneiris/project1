@@ -237,6 +237,12 @@ def another():
                 error='Please login first'
                 return render_template('anotherfile.html', error=error)
             else:
+                ltime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                print ltime
+                args=(uid,shopid,ltime)
+                qi="INSERT INTO likes VALUES(%s,%s,%s)"
+                g.conn.execute(qi, args)
+
                 q="SELECT u.username FROM likes l, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=l.userid AND shopid='%s'"%shopid
                 print q
                 lpeople=g.conn.execute(q)
