@@ -220,7 +220,10 @@ def another():
                 #label=[]
                 for result in lastlabel:
                 #    print result
-                    label=result[0]+1
+                    if result[0]== None:
+                        label=1
+                    else:
+                        label=result[0]+1
                 lastlabel.close()
 
                 args=(label,shopid,uid,cmttime,cmtwrt,v_funnynum,v_coolnum,v_useful)
