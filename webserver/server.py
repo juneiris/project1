@@ -334,6 +334,7 @@ def another():
                 qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
                 g.conn.execute(qi, args)
 
+                #show relevant info
                 q="SELECT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
                 print q
                 rpeople=g.conn.execute(q)
@@ -355,8 +356,40 @@ def another():
                 rh.close()
                 return render_template("reserve.html", data=people,rhist=hist)
 
+        if request.form["submit"]=="Rate it":
+            if uid=='111111':
+                print "ye"
+                error='Please login first'
+                return render_template('anotherfile.html', error=error)
+            else:
 
+                #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                rscore=str(request.form["score"])
+                if rscore=='':
+                    error='Please input your rating score'
+                    return render_template('rate.html',shopid=shopid,error=error)
+                else:
+                    rscore=float(rscore)
+                print rscore
+                #insert new record
+                ratetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                args=(uid,shopid,ratetime,rscore)
+                qi="INSERT INTO rate VALUES(%s,%s,%s,%s)"
+                g.conn.execute(qi, args)
 
+                #show relevant info
+                q="SELECT u.username FROM rate r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
+                print q
+                rpeople=g.conn.execute(q)
+                people=[]
+                flag=0
+                for result in rpeople:
+                    flag=1
+                    people.append(result[0]+"  ")
+                if flag==0:
+                    people.append("No other people rated this shop yet...")
+                rpeople.close()
+                return render_template("rate.html", data=people,score=rscore)
 
 
             #g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)

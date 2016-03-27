@@ -11,15 +11,9 @@
   <h1>Successful!</h1>
 
   <!--<div>{{data}}</div>-->
-  <p>Other shops that you liked:</p>
-  <div>
-  {% for l in lhist %}
-      <!--<div><a href="/another">{{n}}</a></div>-->
-      <div>{{l}}</div>
-    {% endfor %}
-  </div>
+  <p>You rate the shop:</p>{{score}}
 
- <p>See other people who also reserved this restaurant:</p>
+ <p>See other people who also rated this restaurant:</p>
   <div>
   {% for d in data %}
       <!--<div><a href="/another">{{n}}</a></div>-->
