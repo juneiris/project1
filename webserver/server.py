@@ -293,14 +293,14 @@ def another():
             else:
                 # insert new record
                 #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                rtime=date.today()
+                rtime=datetime.now()
                 d=request.form['rdate']
                 t=request.form['rtime']
                 if d=='' or t=='':
                     error='Please input your reservation time'
                     return render_template('anotherfile.html', error=error)
                 dtime=str(d+' '+t)
-                djudge=date.strptime(d, "%Y-%m-%d")
+                djudge=datetime.strptime(d, "%Y-%m-%d")
                 #dtime.strftime('%Y-%m-%d %H:%M:%S')
                 print type(djudge),djudge,type(rtime),rtime
                 #print rtime
