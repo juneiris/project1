@@ -196,7 +196,6 @@ def index():
 @app.route('/another',methods=['GET', 'POST'])
 def another():
     shopid=request.args.get('shopid')
-    shopidcopy=shopid
     print shopid
 
     #write comments
@@ -218,10 +217,10 @@ def another():
                 q="SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid
                 print q
                 lastlabel=g.conn.execute(q)
-                label=[]
+                #label=[]
                 for result in lastlabel:
-                    print result
-                    label.append(result[0])
+                #    print result
+                    label=result[0]
                 lastlabel.close()
                 print label
 
