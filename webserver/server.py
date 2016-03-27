@@ -214,7 +214,9 @@ def another():
                 v_funnynum=0
                 v_coolnum=0
                 v_useful=0
-                lastlabel=g.conn.execute("SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid)
+                q="SELECT MAX(labelnum) FROM comments WHERE shopid='%s'"%shopid
+                print q
+                lastlabel=g.conn.execute(q)
                 label=[]
                 for result in lastlabel:
                     print result
