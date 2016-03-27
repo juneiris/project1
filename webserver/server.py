@@ -301,8 +301,8 @@ def another():
                 rtime=datetime.now()
                 d=request.form['rdate']
                 t=request.form['rtime']
-                if d=='' or t=='':
-                    error='Please input your reservation time'
+                if d=='' or t=='' or num=='':
+                    error='Please input your reservation time and people number'
                     return render_template('anotherfile.html',shopid=shopid,error=error)
                 dtime=str(d+' '+t)
                 djudge=datetime.strptime(d, "%Y-%m-%d")
@@ -325,7 +325,7 @@ def another():
                     flag=1
                     people.append(result[0]+"  ")
                 if flag==0:
-                    people.append("No other people reserved this shop yet... You are the first!")
+                    people.append("No other people reserved this shop yet...")
                 rpeople.close()
                 #print people
                 q2="SELECT s.shopname FROM reserve r, shops s WHERE s.shopid<>'%s'"%shopid +" AND s.shopid=r.shopid AND r.userid='%s'"%uid
