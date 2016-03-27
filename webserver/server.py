@@ -376,6 +376,22 @@ def another():
 
                 print rscore
 
+                cur1=g.conn.execute("SELECT userid from rate")
+                existuser=[]
+                for result in cur1:
+                    existuser.append(result[0])
+                cur1.close()
+                print existuser
+                if uid in existuser:
+                    cur2=g.conn.execute("SELECT shopid from rate WHERE userid='%s'"%uid)
+                    existshop=[]
+                    for result in cur2:
+                        existshop.append(result[0])
+                    cur2.close()
+                    print existshop
+                    if shopid in existshop:
+                        error='You have rated this shop!'
+                        return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 #insert new record
                 ratetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
