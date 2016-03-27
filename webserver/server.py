@@ -292,11 +292,12 @@ def another():
                 return render_template('anotherfile.html', error=error)
             else:
                 # insert new record
-                #rtime=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                rtime=datetime.now()
                 date=request.form['rdate']
                 time=request.form['rtime']
-                datetime=date+time
-                print type(datetime),datetime
+                dtime=date+' '+time
+                dtime.strftime('%Y-%m-%d %H:%M:%S')
+                print type(dtime),dtime,type(rtime)
                 #print rtime
                 #args=(uid,shopid,rtime)
                 #qi="INSERT INTO reserve VALUES(%s,%s,%s)"
