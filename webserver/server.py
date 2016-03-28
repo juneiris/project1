@@ -312,7 +312,7 @@ def another():
                 djudge=datetime.strptime(d, "%Y-%m-%d")
 
                 if (djudge-rtime).seconds<1800 or (djudge-rtime).days<0:
-                    error='reservation time is invalid, it should be at lease half an hour later. Please input again'
+                    error="reservation time is invalid, it's too close from now. Please input again"
                     return render_template('anotherfile.html',shopid=shopid,error=error)
 
                 sh=g.conn.execute("SELECT starthour from shops WHERE shopid='%s'"%shopid)
