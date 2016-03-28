@@ -325,6 +325,15 @@ def another():
                 endhour=datetime.strptime(endhour, "%H:%M:%S")
                 t=datetime.strptime(t, "%H:%M:%S")
                 print starthour,endhour,t
+                if starthour<endhour:
+                    if t<starthour or t>endhour:
+                        error="The time you reserve is not the shop's business hour!"
+                        return render_template('anotherfile.html',shopid=shopid,error=error)
+                else:
+                    if t<starthour and t>endhour:
+                        error="The time you reserve is not the shop's business hour!"
+                        return render_template('anotherfile.html',shopid=shopid,error=error)
+
 
                 #print rtime
                 #deal with existed record in database
