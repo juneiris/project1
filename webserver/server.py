@@ -295,9 +295,13 @@ def another():
 
                 #deal with input error
                 num=str(request.form['pnum'])
-                if num!='':
+                
+                try:
                     num=int(num)
-                print num
+                except:
+                    error='Please input people number as a number'
+                    return render_template('anotherfile.html',shopid=shopid,error=error)
+
                 rtime=datetime.now()
                 d=request.form['rdate']
                 t=request.form['rtime']
