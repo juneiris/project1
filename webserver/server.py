@@ -313,11 +313,11 @@ def another():
 
                 sh=g.conn.execute("SELECT starthour from shops WHERE shopid='%s'"%shopid)
                 for result in sh:
-                    starthour=result[0]
+                    starthour=str(result[0])
                 sh.close()
                 eh=g.conn.execute("SELECT closehour from shops WHERE shopid='%s'"%shopid)
                 for result in eh:
-                    endhour=result[0]
+                    endhour=str(result[0])
                 eh.close()
                 print "query business hour complete"
 
