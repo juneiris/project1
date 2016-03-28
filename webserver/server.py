@@ -295,7 +295,7 @@ def another():
 
                 #deal with input error
                 num=str(request.form['pnum'])
-                
+
                 try:
                     num=int(num)
                 except:
@@ -359,9 +359,9 @@ def another():
                         return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 # insert new record
-                #args=(uid,shopid,dtime,num)
-                #qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
-                #g.conn.execute(qi, args)
+                args=(uid,shopid,dtime,num)
+                qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
+                g.conn.execute(qi, args)
 
                 #show relevant info
                 q="SELECT DISTINCT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
