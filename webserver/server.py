@@ -310,6 +310,22 @@ def another():
                 if (djudge-rtime).seconds<1800 or (djudge-rtime).days<0:
                     error='reservation time is invalid, it should be at lease half an hour later. Please input again'
                     return render_template('anotherfile.html',shopid=shopid,error=error)
+
+                sh=g.conn.execute("SELECT starthour from shops WHERE shopid='%s'"%shopid)
+                for result in sh:
+                    starthour=result[0]
+                sh.close()
+                eh=g.conn.execute("SELECT closehour from shops WHERE shopid='%s'"%shopid)
+                for result in eh:
+                    endhour=result[0]
+                eh.close()
+                print "query business hour complete"
+
+                starthour=datetime.strptime(starthour, "%H:%M:%S")
+                endhour=datetime.strptime(endhour, "%H:%M:%S")
+                t=datetime.strptime(t, "%H:%M:%S")
+                print starthour,endhour,t
+
                 #print rtime
                 #deal with existed record in database
                 cur1=g.conn.execute("SELECT userid from reserve")
@@ -330,9 +346,9 @@ def another():
                         return render_template('anotherfile.html', shopid=shopid,error=error)
 
                 # insert new record
-                args=(uid,shopid,dtime,num)
-                qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
-                g.conn.execute(qi, args)
+                #args=(uid,shopid,dtime,num)
+                #qi="INSERT INTO reserve VALUES(%s,%s,%s,%s)"
+                #g.conn.execute(qi, args)
 
                 #show relevant info
                 q="SELECT DISTINCT u.username FROM reserve r, users u WHERE u.userid<>'%s'"%uid +" AND u.userid=r.userid AND r.shopid='%s'"%shopid
